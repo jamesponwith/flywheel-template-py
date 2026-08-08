@@ -24,3 +24,4 @@ a template repo carrying the full personal agentic flywheel —
 - `.claude/settings.json` — hooks: `bd prime` on session start, ruff on stop
 
 Public metrics for all flywheel repos: [jamesponwith.github.io/dora.html](https://jamesponwith.github.io/dora.html).
+
