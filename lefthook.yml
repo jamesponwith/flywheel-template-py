@@ -9,10 +9,16 @@ pre-commit:
       run: command -v uv >/dev/null || exit 0; uv run ruff check .
     test:
       run: command -v uv >/dev/null || exit 0; uv run pytest
+    shellsyntax:
+      glob: "*.sh"
+      # bash -n, not sh -n: these scripts declare bash and use [[ ]].
+      run: bash -n {staged_files}
 
 # Validate assistant: local AI review before code leaves the machine — no CI minutes, no secrets.
 # ponytail: advisory (never blocks the push); flip to blocking if findings start getting ignored.
 pre-push:
   commands:
     ai-review:
-      run: command -v claude >/dev/null || exit 0; claude -p "/ponytail-review origin/main...HEAD" || true
+      # Three lenses (correctness, security, simplicity), findings recorded in
+      # .flywheel/review.jsonl. Advisory: `|| true` never blocks a push.
+      run: command -v claude >/dev/null || exit 0; claude -p "/flywheel-review origin/main...HEAD" || true

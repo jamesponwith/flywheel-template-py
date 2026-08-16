@@ -1,4 +1,4 @@
-# Learn: weekly DORA-lite snapshot committed back to the repo. Reuses the Go
+# Learn: weekly DORA-lite + agent-effectiveness snapshot. Reuses the Go
 # collector from flywheel-template via `go run` — one canonical copy, no port.
 name: learn
 
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - run: go run github.com/jamesponwith/flywheel-template/tools/dora@latest -repo "$GITHUB_REPOSITORY" -out docs/dora.json
+      - run: go run github.com/jamesponwith/flywheel-template/tools/dora@latest -repo "$GITHUB_REPOSITORY" -out docs/dora.json -prs 50
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
