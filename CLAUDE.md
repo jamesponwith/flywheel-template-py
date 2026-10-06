@@ -24,6 +24,8 @@ Operate → Learn.
 - Never bypass a failing pre-commit hook. If a gate gets skipped twice, delete it or automate it.
 - Pre-push runs a local AI review (ponytail-review) — advisory findings, read them before opening the PR.
 - PRs merge only on a green Validate pipeline; the human is the final approver.
+- The beads database is the source of truth; `.beads/*.jsonl` are local exports, never committed.
+  Run `bd dolt push` after closing beads so the durable copy on origin stays current.
 
 ## Running in production (Operate)
 
