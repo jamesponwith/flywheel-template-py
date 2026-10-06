@@ -13,7 +13,11 @@ if [ -n "$(git config core.hooksPath || true)" ]; then
   git config --unset core.hooksPath
 fi
 
-command -v lefthook >/dev/null || { echo "install lefthook first: brew install lefthook" >&2; exit 1; }
+command -v lefthook >/dev/null || {
+  echo "installing lefthook…"
+  go install github.com/evilmartians/lefthook@latest
+  export PATH="$(go env GOPATH)/bin:$PATH"
+}
 command -v uv >/dev/null || { echo "install uv first: the gate no-ops without it" >&2; exit 1; }
 lefthook install
 
